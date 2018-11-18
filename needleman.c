@@ -1,22 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
+
+int M[20][20];
+int GAP = -2; 
+int MATCH = 5;
+int MISSMATCH = - 1;
 
 void initialize(char[],char[]);
 void ScoreTable(char[],char[]);
 void TraceBack(char[],char[]);
 
-int M[20][20];
-int GAP = -2;
-int MATCH = 5;
-int MISSMATCH = - 1;
+
 
 int main(){
 
-    char seq1[10]="TCCTA";
-    char seq2[10]="TCATA";
+    char seq1[10]="TCCTA"; //First Sequence
+    char seq2[10]="TCATA"; //Second Sequence
 
 
     printf("%s\t%s",seq1,seq2);
@@ -27,6 +28,7 @@ int main(){
     return 0;
 }
 
+//Step 1: Initialize the table
 void initialize(char seq1[],char seq2 []){
 
     int seq1len = strlen(seq1);
@@ -44,6 +46,7 @@ void initialize(char seq1[],char seq2 []){
 
 }
 
+//Step 2: ScoreTable creation
 void ScoreTable(char seq1[],char seq2 []){
     int seq1len = strlen(seq1);
     int seq2len = strlen(seq2);
@@ -61,8 +64,8 @@ void ScoreTable(char seq1[],char seq2 []){
                 scoreDiag = M[i - 1][j - 1] + MISSMATCH;
             }
 
-            int scoreLeft =(M[i][j - 1] + GAP);
-            int scoreUp = (M[i - 1][j] + GAP);
+            int scoreLeft = M[i][j - 1] + GAP;
+            int scoreUp =  M[i - 1][j] + GAP;
 
             int maxScore = MAX(MAX(scoreDiag, scoreLeft), scoreUp);
             M[i][j] = maxScore;
@@ -70,7 +73,7 @@ void ScoreTable(char seq1[],char seq2 []){
     }
 }
 
-
+//Step 3: TraceBack function
 void TraceBack(char seq1[],char seq2 []){
 
     char AlignA,AlignB;
