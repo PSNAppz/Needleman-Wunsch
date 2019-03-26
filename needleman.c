@@ -56,7 +56,6 @@ void initialize(char seq1[],char seq2 []){
 void ScoreTable(char seq1[],char seq2 []){
     int seq1len = strlen(seq1);
     int seq2len = strlen(seq2);
-    int a = -2;
     for (int i = 1; i < seq1len + 1; i++)
     {
         for (int j = 1; j < seq2len + 1; j++)
